@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+  <title>新华金典理财</title>
+  <link rel="stylesheet" href="css/index.css?v=1.0">
+</head>
+<body>
+  <div class="container">
+    <div class="btn">
+      <button class="jump" id="jump">下载新华金典APP</button>
+    </div>
+  </div>
+</body>
+<script src="libs/jquery.min.js"></script>
+<script>
+  $(function() {
+    openApp()
+  }) 
+  var ua = navigator.userAgent.toLowerCase(); 
+  var config = {  
+    scheme_IOS: 'XHJD://open',  
+    scheme_Adr: 'xhjd://app/open',  
+    download_url: 'https://xz.2bai.org/18717254',  
+    timeout: 2000
+  };
+  function openApp() {
+    if(ua.match(/MicroMessenger/i) == 'micromessenger') {
+      // $('.container').hide();
+      var html = '<img src="../static/images/download/wxydy.png" class="boot-page">'
+      $('body').html(html).on('click', function() {
+        $('img').fadeOut(100)
+        $('body').html('<p style="text-align: center; margin-top:100px;">请前往浏览器打开</p>')
+      })
+    }
+    var startTime = Date.now();  
+    var ifr = document.createElement('iframe');  
+    ifr.src = ua.indexOf('os') > 0 ? config.scheme_IOS : config.scheme_Adr;  
+    ifr.style.display = 'none';  
+    document.body.appendChild(ifr);  
+    window.location.href = config.scheme_IOS 
+  }
+  $('#jump').on('click', function() {
+    window.location.href = config.download_url  
+  })
+</script>
+</html>
